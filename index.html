@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Querote</title>
+    <style>
+        /* Estilo del fondo parpadeante */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            overflow: hidden;
+            animation: parpadeo 1s infinite;
+        }
+
+        /* Animación del parpadeo de blanco a rojo */
+        @keyframes parpadeo {
+            0% { background-color: white; }
+            50% { background-color: red; }
+            100% { background-color: white; }
+        }
+
+        /* Imagen centrada en la página */
+        img {
+            position: absolute;
+            max-width: 80%;
+            max-height: 80%;
+            z-index: 10;
+        }
+
+        /* Caja de texto para el mensaje */
+        .mensaje {
+            position: absolute;
+            color: white;
+            font-size: 2rem;
+            font-family: Arial, sans-serif;
+            z-index: 5;
+            text-align: center;
+        }
+
+        /* Caja para la cuenta atrás */
+        #cuentaAtras {
+            position: absolute;
+            color: white;
+            font-size: 3rem;
+            font-family: Arial, sans-serif;
+            z-index: 20;
+            text-align: center;
+            display: none;  /* Inicialmente está oculta */
+        }
+
+        /* Fondo negro para la cuenta atrás */
+        #fondoCuentaAtras {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: none; /* Inicialmente está oculto */
+            z-index: 15;
+        }
+    </style>
+</head>
+<body>
+    <div class="mensaje" id="mensaje">FELISITACIONES MI SENTOLLITA</div>
+    <img src="https://i.ibb.co/Nx8bw9Q/image0.jpg" alt="Imagen de felicitación" id="imagen">
+
+    <!-- Contenedor del fondo negro para la cuenta atrás -->
+    <div id="fondoCuentaAtras"></div>
+
+    <!-- Contenedor de la cuenta atrás -->
+    <div id="cuentaAtras"></div>
+
+    <script>
+        // Función que muestra las alertas en el orden deseado
+        window.onload = function() {
+            // Primera alerta: "Sabes que?"
+            alert('Sabes que?');
+
+            // Segunda alerta: "QUEROTE MOITO" después de que el usuario cierre la primera alerta
+            alert('QUEROTE MOITO');
+
+            // Mostrar cuenta atrás de 3 segundos
+            setTimeout(function() {
+                // Ocultar la imagen y el mensaje
+                document.getElementById('imagen').style.display = 'none';
+                document.getElementById('mensaje').style.display = 'none';
+
+                // Mostrar fondo negro
+                document.getElementById('fondoCuentaAtras').style.display = 'block';
+                
+                // Mostrar el contador
+                let contador = 3;
+                let cuentaAtrasDiv = document.getElementById('cuentaAtras');
+                cuentaAtrasDiv.style.display = 'block';
+
+                // Función para actualizar la cuenta atrás
+                let interval = setInterval(function() {
+                    cuentaAtrasDiv.textContent = contador;
+                    contador--;
+
+                    if (contador < 0) {
+                        clearInterval(interval); // Detener el contador cuando llegue a 0
+                        document.getElementById('fondoCuentaAtras').style.display = 'none'; // Ocultar fondo negro
+                        cuentaAtrasDiv.style.display = 'none'; // Ocultar la cuenta atrás
+
+                        // Mostrar la imagen y el mensaje de nuevo después de la cuenta atrás
+                        document.getElementById('imagen').style.display = 'block';
+                        document.getElementById('mensaje').style.display = 'block';
+                    }
+                }, 1000); // Actualizar cada segundo
+
+            }, 0); // Ejecuta inmediatamente después de la alerta "QUEROTE MOITO"
+
+            // Tercera alerta: "AHORA ME DEBES UN BESUCÓN" después de 15 segundos
+            setTimeout(function() {
+                alert('AHORA ME DEBES UN BESUCÓN');
+            }, 15000); // 15000 ms = 15 segundos
+        };
+    </script>
+</body>
+</html>
